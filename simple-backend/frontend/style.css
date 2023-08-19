@@ -1,0 +1,62 @@
+body {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  background-color: wheat;
+}
+
+h1 {
+  text-align: center;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-container > input {
+  width: 300px;
+  height: 30px;
+  font-size: 1.25rem;
+}
+
+.input-container > button {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  font-size: 1.5rem;
+  background-color: gold;
+}
+
+.container {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.todo {
+  width: 500px;
+  font-size: 1.2rem;
+  padding: 0px 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  background-color: orange;
+}
+
+.actions > button {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  background-color: red;
+  border-color: darkred;
+  color: white;
+  margin-left: 10px;
+  height: 30px;
+  width: 75px;
+  font-size: 1.05rem;
+  border-radius: 10px;
+}
