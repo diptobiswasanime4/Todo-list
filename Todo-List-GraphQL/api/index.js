@@ -1,5 +1,6 @@
 const { ApolloServer, gql } = require("apollo-server");
 const express = require("express");
+const { v4 } = require("uuid");
 
 const app = express();
 
@@ -18,12 +19,33 @@ const typeDefs = gql`
 
   type Mutation {
     addTodo(title: String!): Todo
+    toggleCompleted(id: ID!): Todo
   }
 `;
 
-let todos = {};
+let todos = [];
 
-const resolvers = {};
+const resolvers = {
+  Query: {
+    todos() {
+      return todos;
+    },
+  },
+  Mutation: {
+    addTodo(_, args) {
+      const newTodo = { id: v4(), title: args.title, completed: false };
+      todos.push(newTodo);
+      return newTodo;
+    },
+    toggleCompleted(_, args) {
+      const todo = todos.find((todo) => todo.id == args.id);
+      if (todo) {
+        todo.completed = !todo.completed;
+      }
+      return todo;
+    },
+  },
+};
 
 const server = new ApolloServer({
   typeDefs,
