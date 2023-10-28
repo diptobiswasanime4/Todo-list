@@ -24,7 +24,7 @@ app.post("/todos", async (req, res) => {
       "INSERT INTO todo (todo_desc, todo_completed) VALUES($1, $2) RETURNING *",
       [desc, completed]
     );
-    res.json(newTodo);
+    res.json({ newTodo, msg: "Todo Added", success: true });
   } catch (error) {
     res.json({ error });
   }
@@ -72,6 +72,15 @@ app.delete("/todos/:id", async (req, res) => {
       id,
     ]);
     res.json({ msg: "Todo deleted!", success: true });
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+app.delete("/delete", async (req, res) => {
+  try {
+    const delAllTodos = await pool.query("DELETE FROM todo");
+    res.json({ msg: "All todos deleted!", success: true });
   } catch (error) {
     res.json(error);
   }
