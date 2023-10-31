@@ -48,8 +48,8 @@ app.get("/todos/:id", async (req, res) => {
 app.post("/todos", async (req, res) => {
   try {
     const { desc } = req.body;
-    await createTodo(desc);
-    res.json({ msg: "Todo added" });
+    const newTodo = await createTodo(desc);
+    res.json({ msg: "Todo added", success: true, newTodo: newTodo });
   } catch (error) {
     res.json(error);
   }
@@ -70,7 +70,7 @@ app.delete("/todos/:id", async (req, res) => {
   try {
     const { id } = req.params;
     await deleteTodo(Number(id));
-    res.json({ msg: "Todo deleted" });
+    res.json({ msg: "Todo deleted", success: true });
   } catch (error) {
     res.json(error);
   }

@@ -13,6 +13,7 @@ function App() {
   const [editTodoChecked, setEditTodoChecked] = useState(false);
   useEffect(() => {
     const resp = axios.get("/todos").then((resp) => {
+      console.log(resp);
       setTodos(resp.data);
     });
   }, []);
@@ -23,8 +24,9 @@ function App() {
       completed: "false",
     };
     const resp = await axios.post("/todos", data);
+    console.log(resp);
     if (resp.data.success) {
-      setTodos((prevTodos) => [...prevTodos, resp.data.newTodo.rows[0]]);
+      setTodos((prevTodos) => [...prevTodos, resp.data.newTodo]);
     }
     setInputTodo("");
   }
@@ -51,7 +53,7 @@ function App() {
     }
   }
   async function clearAllTodos(e) {
-    const resp = await axios.delete("/delete");
+    const resp = await axios.delete("/todos");
     setTodos([]);
   }
 

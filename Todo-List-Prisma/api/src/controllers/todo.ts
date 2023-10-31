@@ -17,11 +17,12 @@ async function getTodo(todoId) {
 }
 
 async function createTodo(todoDesc: String) {
-  await prisma.todo.create({
+  const newTodo = await prisma.todo.create({
     data: {
       desc: todoDesc,
     },
   });
+  return newTodo;
 }
 
 async function updateTodo(todoId, todoDesc, todoCompleted) {
