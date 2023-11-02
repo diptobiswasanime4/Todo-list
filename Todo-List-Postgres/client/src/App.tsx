@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Todos from "./components/Todos";
 
 axios.defaults.baseURL = "http://localhost:3000";
 

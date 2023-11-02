@@ -2,7 +2,6 @@ import { router, publicProcedure } from "./trpc";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import express from "express";
 import cors from "cors";
-// import { createHTTPServer } from "@trpc/server/adapters/standalone";
 import { z } from "zod";
 
 const todoInputType = z.object({
@@ -11,10 +10,24 @@ const todoInputType = z.object({
   completed: z.boolean(),
 });
 
+const todos = [
+  {
+    id: "1",
+    desc: "Write Code",
+    completed: false,
+  },
+];
+
 const appRouter = router({
-  greet: publicProcedure.query(() => {
+  getTodos: publicProcedure.query(() => {
+    return todos;
+  }),
+  createTodo: publicProcedure.input(todoInputType).mutation(async (opts) => {
+    const { id, desc, completed } = opts.input;
+    todos.push({ id, desc, completed });
     return {
-      msg: "Hello World",
+      msg: "Todo created",
+      id,
     };
   }),
 });
@@ -29,10 +42,5 @@ const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`App is running on PORT ${PORT}...`);
 });
-// const server = createHTTPServer({
-//   router: appRouter,
-// });
-
-// server.listen(3000);
 
 export type AppRouter = typeof appRouter;
