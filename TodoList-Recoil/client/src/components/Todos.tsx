@@ -1,47 +1,52 @@
 import React, { useState } from "react";
 import { useRecoilState } from "recoil";
 import { todoState } from "../state/atoms/TodoState";
-import { v4 } from "uuid";
+import {editState} from "../state/atoms/EditState"
 import Todo from "./Todo";
+import InputBox from "./InputBox";
+import {editTodoState} from "../state/atoms/EditTodoState"
 
 function Todos() {
   const [todos, setTodos] = useRecoilState(todoState);
-  const [inputText, setInputText] = useState("");
+  const [editMode, setEditMode] = useRecoilState(editState)
+  const [editTodo, setEditTodo]  = useRecoilState(editTodoState)
 
-  function addTodo() {
-    setTodos((prevTodos) => [
-      ...prevTodos,
-      { id: v4(), name: inputText, completed: false },
-    ]);
+
+  function updateTodo() {
+    const index = todos.findIndex(todo => todo.id == editTodo.id)
+
+    const updatedTodos = [...todos]
+
+    updatedTodos[index] = editTodo
+
+    setTodos(updatedTodos)
+
+    console.log(todos);
+    
+
+    setEditMode(false)
   }
+  
 
-  function clearTodo() {
-    setTodos([]);
+  if (editMode) {
+    return (
+      <div className="flex flex-col gap-4">
+        <div className="">
+        <label className="text-xl pr-4">Edit Todo:</label>
+        <input className="text-xl shadow-md" type="text" placeholder="Edit Todo" value={editTodo.name} onChange={e => setEditTodo({...editTodo, name: e.target.value})} />
+      </div>
+      <div className="">
+        <label className="text-xl pr-4">Edit Completed:</label>
+        <input className="text-xl shadow-md" type="checkbox" checked={editTodo.completed} onChange={e => setEditTodo({...editTodo, completed: e.target.checked})} />
+      </div>
+      <button onClick={updateTodo} className="text-xl bg-green-600 text-white hover:bg-green-500 py-1 rounded-full">Submit</button>
+      </div>
+    )
   }
 
   return (
     <div className="">
-      <div className="flex gap-2">
-        <input
-          className="text-xl"
-          type="text"
-          placeholder="Enter Todo"
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-        />
-        <button
-          onClick={addTodo}
-          className="bg-green-600 hover:bg-green-500 rounded-md text-white py-1 px-3 text-xl"
-        >
-          Add
-        </button>
-        <button
-          onClick={clearTodo}
-          className="bg-gray-500 hover:bg-gray-400 rounded-md text-white py-1 px-3 text-xl"
-        >
-          Clear
-        </button>
-      </div>
+      <InputBox/>
       <div className="flex flex-col gap-2 pt-4">
         {todos.map((todo) => {
           return (
