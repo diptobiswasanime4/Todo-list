@@ -1,42 +1,42 @@
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 
 input {
-    width: 300px;
-    height: 30px;
-    font-size: 1.25rem;
+  width: 300px;
+  height: 30px;
+  font-size: 1.25rem;
 }
 
 button {
-    font-size: 1.2rem;
-    padding: 8px;
-    background-color: black;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
+  font-size: 1.2rem;
+  padding: 8px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 button:hover {
-    opacity: 85%;
+  opacity: 85%;
 }
 
 .todo {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px;
-    border-radius: 10px;
-    width: 400px;
-    height: 40px;
-    background-color: gainsboro;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-radius: 10px;
+  width: 400px;
+  height: 40px;
+  background-color: gainsboro;
 }
 
 p {
-    font-size: 1.25rem;
+  font-size: 1.25rem;
 }
