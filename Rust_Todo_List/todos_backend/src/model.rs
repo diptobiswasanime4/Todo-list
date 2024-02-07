@@ -22,8 +22,8 @@ impl ModelController {
     pub async fn new() -> Result<Self> {
         Ok(Self {
             todos_store: Arc::new(Mutex::new(vec![
-                Some(Todo {id: 0, title: String::from("Write Rust")}),
-                Some(Todo {id: 1, title: String::from("Write Python")}),
+                Some(Todo {id: 0, title: String::from("Write Rust Code.")}),
+                Some(Todo {id: 1, title: String::from("Write TS Code.")}),
             ]))
         })
     }
